@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+      p {
+        display: inline-block;
+      }
+      .great-balance-money {
+        outline: 0.0625rem solid lightgreen;
+      }
+      .small-balance-money {
+        outline: 0.0625rem solid lightcoral;
+      }
+
+      .increase {
+        background-color: lightgreen;
+      }
+      .decrease {
+        background-color: lightcoral;
+      }
+    </style>
+    <title>Basics of Syntax</title>
+  </head>
+  <body>
+    <header class="header"></header>
+    <main class="page">
+      <section id="root" class="passangers"></section>
+    </main>
+    <footer class="footer"></footer>
+    <script type="text/babel">
+      const data = {
+        Usd: 41,
+        Eur: 43,
+      };
+      function Bank() {
+        const [balance, setBalance] = React.useState(0);
+
+        const [increaseBalance, setIncreaseBalance] = React.useState(0);
+
+        const [decreaseBalance, setDecreaseBalance] = React.useState(0);
+
+        const [observeMoneyQuantityStyle, setObserveMoneyQuantityStyle] = React.useState("small-balance-money");
+
+        const [balanceStyle, setBalanceStyle] = React.useState("");
+
+        const dollars = (balance / data.Usd).toFixed(2);
+
+        const euros = (balance / data.Eur).toFixed(2);
+
+		  function updateMoneyStyle(sum) {
+			setObserveMoneyQuantityStyle(
+			  sum >= 100 ? "great-balance-money" : "small-balance-money"
+			);
+		 }
+
+        function getIncreasedBalance() {
+          setBalance((prevBalance) => {
+            const increasedBalance = prevBalance + increaseBalance;
+            updateMoneyStyle(increasedBalance)
+            return increasedBalance;
+          });
+          setIncreaseBalance(0);
+          setBalanceStyle("increase");
+        }
+
+		  
+
+        function getDecreasedBalance() {
+          setBalance((prevBalance) => {
+            const decreasedBalance = prevBalance - decreaseBalance;
+            updateMoneyStyle(decreasedBalance)
+            return decreasedBalance;
+          });
+          setDecreaseBalance(0);
+          setBalanceStyle("decrease");
+        }
+
+        function increasingBalance(e) {
+          if (e.target.value > 0) {
+            setIncreaseBalance(Number(e.target.value));
+          } else {
+            setIncreaseBalance(0);
+          }
+        }
+
+        function decreasingBalance(e) {
+          if (e.target.value > 0) {
+            setDecreaseBalance(Number(e.target.value));
+          } else {
+            setDecreaseBalance(0);
+          }
+        }
+        const percent = Math.abs(balance * 0.03);
+        return (
+          <div>
+            <div>
+              <p className={`${balanceStyle} ${observeMoneyQuantityStyle}`}>{`Сума на рахунку: ${balance}`}</p>
+              <div>
+                <label>
+                  Зараховано на рахунок:
+                  <input type="number" value={increaseBalance} onChange={increasingBalance} />
+                </label>
+                <button onClick={getIncreasedBalance}>Зарахувати</button>
+              </div>
+              <div>
+                <label>
+                  Зняти з рахунку:
+                  <input type="number" value={decreaseBalance} onChange={decreasingBalance} />
+                </label>
+                <button onClick={getDecreasedBalance}>Зняти</button>
+              </div>
+            </div>
+            <p>{`Відсотки обслуговування ${percent.toFixed(2)} грн`}</p>
+            <hr />
+            <p>{`Сума в доларах: ${dollars}`}</p>
+            <p>{`Сума в євро: ${euros}`}</p>
+          </div>
+        );
+      }
+
+      //Головний компонент App
+      const App = function () {
+        return <Bank />;
+      };
+      //Корінь
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
