@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Basics of Syntax</title>
+  </head>
+  <body>
+    <header class="header"></header>
+    <main class="page">
+      <section id="root" class="passangers">
+		</section>
+    </main>
+    <footer class="footer"></footer>
+    <script type="text/babel">
+		const users = [
+		{ login: "admin", password: "12345" },
+		{ login: "user1", password: "qwerty" },
+		{ login: "test", password: "1111" },
+		{ login: "andriy", password: "pass2024" }
+	 ];
+		function UserRegistration (){
+			const [userLogin, setUserLogin] = React.useState("")
+			const [userPassword, setUserPassword] = React.useState("")
+
+			function checkUser (){
+				let checkResult = users.find((el)=> el.login === userLogin && el.password === userPassword)
+				if(checkResult){
+					alert('Вітаємо вас!')
+				}
+				else{
+					alert('Введені неправильні дані. Перевірте логін або пароль!')
+				}
+				setUserLogin("")
+				setUserPassword("")
+			}
+
+			return(
+				<div>
+					<div>
+						<label>
+							Login
+							<input type="text" value = {userLogin} onChange = {(e)=> setUserLogin(e.target.value)}/>
+						</label> 
+						<label>
+							Password
+							<input type="password" value = {userPassword} onChange = {(e)=> setUserPassword(e.target.value)}/>
+						</label>
+					</div>
+					<button onClick = {checkUser}>Go</button>
+				</div>
+			)
+		}
+
+		//Головний компонент App
+      const App = function(){
+			return(
+			  <UserRegistration/>
+				
+			)
+		}
+  //Корінь
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(React.createElement(App));
+    </script>
+  </body>
+</html>

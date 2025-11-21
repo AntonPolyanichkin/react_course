@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Basics of Syntax</title>
+  </head>
+  <body>
+    <header class="header"></header>
+    <main class="page">
+      <section id="root" class="passangers"></section>
+    </main>
+    <footer class="footer"></footer>
+    <script type="text/babel">
+      class SeasonInformation {
+        constructor(month, clothes, pictureSrc) {
+          (this.month = month), (this.clothes = clothes), (this.pictureSrc = pictureSrc);
+        }
+      }
+
+      function Season() {
+        const [month, setMonth] = React.useState(0);
+        function getseasonInfo(month) {
+          if ([1, 2, 12].includes(month)) {
+            return new SeasonInformation(month, "Зимній одяг", "img/winter.jpg");
+          } else if ([3, 4, 5].includes(month)) {
+            return new SeasonInformation(month, "Весняний одяг", "img/spring.avif");
+          } else if ([6, 7, 8].includes(month)) {
+            return new SeasonInformation(month, "Літній одяг", "img/summer.jpg");
+          } else if ([9, 10, 11].includes(month)) {
+            return new SeasonInformation(month, "Осінній одяг", "img/autumn.jpeg");
+          } else {
+            return new SeasonInformation(0, "Не виизначена пора року", "");
+          }
+        }
+
+        function getSeasonNumber(e) {
+          const validMonth = e.target.value >= 0 && e.target.value <= 12;
+          if (e.target.tagName === "INPUT" && validMonth) return setMonth(Number(e.target.value));
+          else {
+            setMonth(0);
+          }
+        }
+
+        const infoSeason = getseasonInfo(month);
+        return (
+          <div>
+            <div>
+              <label>
+                Введіть номер місяця
+                <input type="number" name="season-number" value={month} onChange={getSeasonNumber} />
+              </label>
+              <p>{`Номер місяця : ${infoSeason.month}, Одяг : ${infoSeason.clothes}`}</p>
+              <img src={`./${infoSeason.pictureSrc}`} alt="some alt" style={{ width: "12.5rem" }} />
+            </div>
+          </div>
+        );
+      }
+
+      //Головний компонент App
+      const App = function () {
+        return <Season />;
+      };
+      //Корінь
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>

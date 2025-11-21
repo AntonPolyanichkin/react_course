@@ -1,0 +1,138 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+html,
+body {
+  line-height: 1;
+  height: 100%;
+}
+
+/* FORM */
+input,
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+button,
+select,
+option,
+a {
+  cursor: pointer;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: clip;
+  min-height: 100%;
+}
+.wrapper .page {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: rgb(81, 81, 81);
+}
+
+.header,
+.footer {
+  font-size: 1.875rem;
+  background-color: rgb(87, 95, 242);
+  color: #fff;
+  text-align: center;
+  padding: 1.25rem;
+}
+
+.header {
+  margin-bottom: 1.25rem;
+}
+
+[class*=__container] {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  margin: 0 auto;
+}
+
+.tasks {
+  color: #fff;
+}
+.tasks .tasks__container {
+  max-width: 50rem;
+}
+.tasks .tasks__container .block-task {
+  text-align: center;
+}
+.tasks .tasks__container .block-task .block-task-list {
+  font-size: 1.5625rem;
+  line-height: 1.2;
+}
+.tasks .tasks__container .block-task .block-task-list .block-task-list__element:not(:last-of-type) {
+  margin-bottom: 1.25rem;
+}
+.tasks .tasks__container .block-task .block-task-list .block-task-list__element a:hover {
+  text-decoration: underline;
+}

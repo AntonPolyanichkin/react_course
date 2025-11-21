@@ -1,0 +1,53 @@
+@use "_reset.scss";
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	overflow: clip;
+	min-height: 100%;
+	.page {
+		flex-grow: 1;
+	}
+}
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: rgb(81, 81, 81);
+}
+.header,
+.footer {
+	font-size: 1.875rem;
+	background-color: rgb(87, 95, 242);
+	color: #fff;
+	text-align: center;
+	padding: 1.25rem;
+}
+.header {
+	margin-bottom: 1.25rem;
+}
+
+[class*="__container"] {
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+	margin: 0 auto;
+}
+
+.tasks {
+	color: #fff;
+	& .tasks__container {
+		max-width: 50rem;
+		& .block-task {
+			text-align: center;
+			& .block-task-list {
+				font-size: 1.5625rem;
+				line-height: 1.2;
+				& .block-task-list__element:not(:last-of-type) {
+					margin-bottom: 1.25rem;
+				}
+				& .block-task-list__element {
+					& a:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
